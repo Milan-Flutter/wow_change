@@ -478,6 +478,7 @@ class _profileState extends State<profile> {
                                         border: Border.all(
 
                                           width: 2.0,
+                                          color: Colors.white
                                         ),
                                       ),
                                       child: InkWell(
@@ -486,11 +487,11 @@ class _profileState extends State<profile> {
                                         },
                                         child: CircleAvatar(
                                           radius: 30,
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: Colors.transparent,
                                           child: Center(
                                             child: Icon(
                                               Icons.add,
-                                              color: Colors.black,
+                                              color: Colors.white,
                                             ),
                                           ),
                                         ),
@@ -546,22 +547,37 @@ class _profileState extends State<profile> {
                                                   BoxDecoration(
                                                     shape:
                                                     BoxShape.circle,
-                                                    border: Border.all(
-                                                      color: Color(
-                                                          0xffC7C7CC),
-                                                      width: 2.0,
-                                                    ),
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        main_color,
+                                                        s2
+                                                      ],
+                                                      begin: Alignment.topCenter,
+                                                      end: Alignment.bottomCenter
+                                                    )
                                                   ),
                                                   padding:
                                                   EdgeInsets.all(2),
-                                                  child: CircleAvatar(
-                                                    backgroundImage:
-                                                    NetworkImage(getst!
-                                                        .data![
-                                                    index]
-                                                        .link
-                                                        .toString()),
-                                                    radius: 30,
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(3),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black,
+                                                      shape:
+                                                      BoxShape.circle,
+
+
+                                                    ),
+
+                                                    child: CircleAvatar(
+
+                                                      backgroundImage:
+                                                      NetworkImage(getst!
+                                                          .data![
+                                                      index]
+                                                          .link
+                                                          .toString()),
+                                                      radius: 30,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -641,10 +657,7 @@ class _profileState extends State<profile> {
                                     width: 150,
                                     height: 150,
                                     decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Color(0xffC7C7CC),
-                                          width: 2.0,
-                                        ),
+
                                         image: DecorationImage(
                                             image: NetworkImage(getpo!
                                                 .data![index - 1].link

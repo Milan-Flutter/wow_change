@@ -61,8 +61,8 @@ class _story_view_pageState extends State<story_view_page>
                 SizedBox(height: MediaQuery.of(context).size.height * .05,),
                 LinearProgressIndicator(
                   value: _animationController.value,
-                  color: main_color,
-                  backgroundColor: s_color,
+                  color: s1,
+                  backgroundColor: s2,
                 ),
 
               ],

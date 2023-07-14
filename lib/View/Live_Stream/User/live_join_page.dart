@@ -260,7 +260,7 @@ class _live_page_userState extends State<live_page_user> {
             ),
             RefreshIndicator(
               onRefresh: _refreshData,
-              color: main_color,
+              color: s2,
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 child: Column(
@@ -270,7 +270,7 @@ class _live_page_userState extends State<live_page_user> {
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xffE8E6EA).withOpacity(.5),
+                            color: Colors.transparent,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: TextField(
@@ -278,10 +278,14 @@ class _live_page_userState extends State<live_page_user> {
                               filterHosts(value);
                             },
                             cursorColor: Colors.grey,
+                            style: TextStyle(
+                              color: font
+                            ),
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.search_sharp),
+                              prefixIcon: Icon(Icons.search_sharp,color: Colors.white,),
+
                               hintText: 'Search',
-                              hintStyle: TextStyle(fontSize: 12, color: Color(0xff3F2D20)),
+                              hintStyle: TextStyle(fontSize: 12, color: font),
                               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -292,8 +296,26 @@ class _live_page_userState extends State<live_page_user> {
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: BorderSide(
-                                  color: Color(0xffE8E6EA), // Set the border color when the TextField is focused
+                                  color:
+                                  s2, // Set the border color when the TextField is focused
                                 ),
+
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color:
+                                  s2, // Set the border color when the TextField is focused
+                                ),
+
+                              ),
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color:
+                                  s2, // Set the border color when the TextField is focused
+                                ),
+
                               ),
                             ),
                           ),

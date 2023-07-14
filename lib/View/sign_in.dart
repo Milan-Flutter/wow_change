@@ -210,6 +210,7 @@ class _SignInState extends State<SignIn> {
         return false;
       },
       child: Scaffold(
+        backgroundColor: bg,
         body: SafeArea(
           child: Stack(
             children: [

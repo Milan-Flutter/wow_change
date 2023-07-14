@@ -15,6 +15,7 @@ class _onbordingState extends State<onbording> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: SafeArea(
         child: Stack(
           children: [

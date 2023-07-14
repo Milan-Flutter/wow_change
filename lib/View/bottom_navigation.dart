@@ -157,7 +157,7 @@ class _botttom_navigateState extends State<botttom_navigate>
                           width: MediaQuery.of(context).size.width * .6,
                           padding: EdgeInsets.only(right: 10, left: 5),
                           decoration: BoxDecoration(
-                            color: main_color,
+                            gradient: b2,
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(15.0),
                               bottomRight: Radius.circular(15.0),
@@ -205,7 +205,7 @@ class _botttom_navigateState extends State<botttom_navigate>
                               Text(
                                 "You must be 18 years old or over to enter",
                                 style:
-                                    TextStyle(color: main_color, fontSize: 10),
+                                    TextStyle(color: Colors.black, fontSize: 10),
                               )
                             ],
                           ),
@@ -220,7 +220,7 @@ class _botttom_navigateState extends State<botttom_navigate>
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(40),
                                 side: BorderSide(
-                                  color: main_color,
+                                  color: s2,
                                   width: 2.0,
                                 ),
                               ),
@@ -236,7 +236,7 @@ class _botttom_navigateState extends State<botttom_navigate>
                                   'Yes! I am 18+',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: main_color,
+                                    color: s2,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -283,7 +283,7 @@ class _botttom_navigateState extends State<botttom_navigate>
                         width: MediaQuery.of(context).size.width * .6,
                         padding: EdgeInsets.only(right: 10, left: 5),
                         decoration: BoxDecoration(
-                          color: main_color,
+                          gradient: b2,
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(15.0),
                             bottomRight: Radius.circular(15.0),
@@ -330,7 +330,7 @@ class _botttom_navigateState extends State<botttom_navigate>
                             ),
                             Text(
                               "You must be 18 years old or over to enter",
-                              style: TextStyle(color: main_color, fontSize: 10),
+                              style: TextStyle(color: Colors.black, fontSize: 10),
                             )
                           ],
                         ),
@@ -345,7 +345,7 @@ class _botttom_navigateState extends State<botttom_navigate>
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
                               side: BorderSide(
-                                color: main_color,
+                                color: s2,
                                 width: 2.0,
                               ),
                             ),
@@ -362,7 +362,7 @@ class _botttom_navigateState extends State<botttom_navigate>
                                 'Yes! I am 18+',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: main_color,
+                                  color: s2,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -505,6 +505,7 @@ class _botttom_navigateState extends State<botttom_navigate>
 
   @override
   void initState() {
+
     controller.harsh();
     check();
     controller.bank_details();

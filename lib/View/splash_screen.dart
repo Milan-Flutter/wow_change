@@ -77,6 +77,7 @@ class _spalsh_scrrenState extends State<spalsh_scrren> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: Stack(
         children: [
           Image.asset(

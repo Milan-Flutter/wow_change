@@ -161,6 +161,7 @@ class _sign_emailState extends State<sign_email> {
         return false;
       },
       child: Scaffold(
+        backgroundColor: bg,
         body: SafeArea(
           child: Stack(
             children: [

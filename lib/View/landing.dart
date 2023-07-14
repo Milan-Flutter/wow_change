@@ -16,8 +16,8 @@ class landing extends StatefulWidget {
 class _landingState extends State<landing> {
   final List<String> imagesList = [
     'assets/img_4.png',
-    'assets/img_4.png',
-    'assets/img_4.png',
+    'assets/img_36.png',
+    'assets/img_37.png',
   ];
   int _current = 0;
   void _launchURL(String url) async {
@@ -31,6 +31,7 @@ class _landingState extends State<landing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: SafeArea(
         child: Stack(
           children: [
