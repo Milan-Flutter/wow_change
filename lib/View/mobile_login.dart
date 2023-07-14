@@ -45,6 +45,7 @@ class _mobile_loginState extends State<mobile_login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: SafeArea(
         child: Container(
           child: Stack(
@@ -76,7 +77,7 @@ class _mobile_loginState extends State<mobile_login> {
                           "App Logo",
                           style: TextStyle(
                               fontSize: 30,
-                              color: Color(0xff111A41),
+                              color: font,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -87,7 +88,7 @@ class _mobile_loginState extends State<mobile_login> {
                     Text(
                       "Mobile Login",
                       style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                          TextStyle(fontSize: 30,  color: font, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .01,
@@ -96,7 +97,7 @@ class _mobile_loginState extends State<mobile_login> {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Text(
                         "Please enter your valid phone number. We will send you a 6-digit code to verify your account.",
-                        style: TextStyle(fontSize: 11),
+                        style: TextStyle( color: font,fontSize: 11),
                       ),
                     ),
                     SizedBox(
@@ -106,12 +107,15 @@ class _mobile_loginState extends State<mobile_login> {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: TextField(
                         controller: _phoneController,
+                        style: TextStyle(
+                          color: font,
+                        ),
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.phone_android),
+                          prefixIcon: Icon(Icons.phone_android, color: font,),
                           hintText: '99999 99999',
                           hintStyle:
-                              TextStyle(fontSize: 12, color: Color(0xff3F2D20)),
+                              TextStyle(fontSize: 12, color: font,),
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 15),
                           border: OutlineInputBorder(
@@ -124,8 +128,25 @@ class _mobile_loginState extends State<mobile_login> {
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
                               color:
-                                  main_color, // Set the border color when the TextField is focused
+                              s2, // Set the border color when the TextField is focused
                             ),
+
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color:
+                              s2, // Set the border color when the TextField is focused
+                            ),
+
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color:
+                              s2, // Set the border color when the TextField is focused
+                            ),
+
                           ),
                         ),
                       ),
@@ -135,14 +156,8 @@ class _mobile_loginState extends State<mobile_login> {
                     ),
                     Container(
                       margin: EdgeInsets.only(bottom: 50),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: main_color,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        onPressed: () {
+                      child: InkWell(
+                        onTap: (){
                           if (_phoneController.text.length == 10) {
                             check_login();
                           } else {
@@ -154,6 +169,10 @@ class _mobile_loginState extends State<mobile_login> {
                         child: Container(
                           height: MediaQuery.of(context).size.height * .06,
                           width: MediaQuery.of(context).size.width * .75,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: b2
+                          ),
                           child: Center(
                             child: Text(
                               'Verify Otp',

@@ -307,7 +307,7 @@ class _chat_homeState extends State<chat_home> {
                                       backgroundColor:
                                       s_color.withOpacity(.3),
                                       child: Image.asset(
-                                        "assets/img_29.png",
+                                        "assets/img_17.png",
                                         height: 30,
                                         width: 30,
                                       ),

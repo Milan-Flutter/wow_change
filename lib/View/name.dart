@@ -20,6 +20,7 @@ class _nameState extends State<name> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Stack(
           children: [
@@ -37,18 +38,24 @@ class _nameState extends State<name> {
                   children: [
                     InkWell(
                       onTap: () {
+
                         Navigator.pop(context);
                       },
                       child: Container(
                         padding: EdgeInsets.all(10),
-                        height: MediaQuery.of(context).size.height * .06,
+                        height:
+                        MediaQuery.of(context).size.height * .06,
                         width: MediaQuery.of(context).size.width * .13,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Color(0xffFFFFFF)),
+                            color: s1.withOpacity(.5),
+                            border: Border.all(
+                                color: s1
+                            )
+                        ),
                         child: Icon(
                           Icons.arrow_back_ios_new_outlined,
-                          color: s_color,
+                          color: Colors.white,
                           size: 15,
                         ),
                       ),
@@ -60,7 +67,7 @@ class _nameState extends State<name> {
                       "Name",
                       style: TextStyle(
                           fontSize: 28,
-                          color: Color(0xff111A41),
+                          color: font,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -70,12 +77,15 @@ class _nameState extends State<name> {
                       padding: const EdgeInsets.all(20.0),
                       child: TextField(
                         controller: _controller,
+                        style: TextStyle(
+                          color: font
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Your Your Name',
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 15),
                           hintStyle:
-                              TextStyle(fontSize: 12, color: Color(0xff3F2D20)),
+                              TextStyle(fontSize: 12, color: font),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                               borderSide: BorderSide(color: main_color)),
@@ -83,8 +93,25 @@ class _nameState extends State<name> {
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
                               color:
-                                  main_color, // Set the border color when the TextField is focused
+                              s2, // Set the border color when the TextField is focused
                             ),
+
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color:
+                              s2, // Set the border color when the TextField is focused
+                            ),
+
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color:
+                              s2, // Set the border color when the TextField is focused
+                            ),
+
                           ),
                         ),
                       ),
@@ -96,21 +123,16 @@ class _nameState extends State<name> {
                       child: Container(
                         margin: EdgeInsets.only(bottom: 50),
                         child: Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xffE32753),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                            ),
-                            onPressed: () {
+                          child: InkWell(
+                            onTap: ()
+                            {
                               Navigator.push(
                                   context,
                                   PageTransition(
                                       type: PageTransitionType.rightToLeft,
                                       child: i_am(
                                         mobile_num:
-                                            widget.mobile_num.toString(),
+                                        widget.mobile_num.toString(),
                                         status: widget.status.toString(),
                                         name: _controller.text,
                                       )));
@@ -118,6 +140,10 @@ class _nameState extends State<name> {
                             child: Container(
                               height: MediaQuery.of(context).size.height * .06,
                               width: MediaQuery.of(context).size.width * .8,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: b2
+                              ),
                               child: Center(
                                 child: Text(
                                   'Continue',

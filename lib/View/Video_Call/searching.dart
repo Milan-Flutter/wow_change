@@ -1,21 +1,13 @@
 import 'dart:convert';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wow/View/bottom_navigation.dart';
 import 'package:wow/View/wallet.dart';
-
-import '../../Api/All_Data.dart';
 import '../../Controller/image_controller.dart';
 import '../../Controller/profile_data.dart';
-import '../../Model/All_Data.dart';
 import '../../constant.dart';
 import 'call_page.dart';
 
@@ -212,17 +204,14 @@ class _searchingState extends State<searching> {
         body: SafeArea(
           child: Stack(
             children: [
-              Center(
-                child: Lottie.network(
-                  animationUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
               Image.asset(
                 'assets/all.png', // replace with your image path
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: double.infinity,
+              ),
+              Center(
+                child:  SpinKitRipple(color: s2,size: 400,borderWidth: 30,),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,7 +260,7 @@ class _searchingState extends State<searching> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .35,
+                    height: MediaQuery.of(context).size.height * .32,
                   ),
                   Center(
                     child: Obx(() {

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class ImageLoopController extends GetxController {
   RxInt currentImageIndex = 0.obs;
   List<String> images = [
-    'assets/img_30.png',
+    'assets/img_11.png',
     'assets/img_31.png',
     'assets/img_32.png',
   ];

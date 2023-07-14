@@ -432,11 +432,7 @@ class _profileState extends State<profile> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                "assets/img_24.png",
-                                height: 25,
-                                width: 25,
-                              ),
+                             Icon(Icons.edit,color: Colors.white,size: 25,),
                               SizedBox(
                                 width: 10,
                               ),

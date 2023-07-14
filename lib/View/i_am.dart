@@ -163,18 +163,24 @@ class _i_amState extends State<i_am> {
                 children: [
                   InkWell(
                     onTap: () {
+
                       Navigator.pop(context);
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height * .06,
+                      height:
+                      MediaQuery.of(context).size.height * .06,
                       width: MediaQuery.of(context).size.width * .13,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: Color(0xffFFFFFF)),
+                          color: s1.withOpacity(.5),
+                          border: Border.all(
+                              color: s1
+                          )
+                      ),
                       child: Icon(
                         Icons.arrow_back_ios_new_outlined,
-                        color: s_color,
+                        color: Colors.white,
                         size: 15,
                       ),
                     ),
@@ -186,7 +192,7 @@ class _i_amState extends State<i_am> {
                     "I am a",
                     style: TextStyle(
                         fontSize: 28,
-                        color: Color(0xff111A41),
+                        color: font,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -210,9 +216,12 @@ class _i_amState extends State<i_am> {
                               width: MediaQuery.of(context).size.width * .8,
                               decoration: BoxDecoration(
                                 color: _selectedGender == 'female'
-                                    ? Color(0xFFff85a6)
-                                    : Colors.transparent,
+                                    ? s2
+                                    : s2.withOpacity(.3),
                                 borderRadius: BorderRadius.circular(10),
+                                border: _selectedGender != 'female'?Border.all(
+                                  color: s2
+                                ):null
                               ),
                               child: Row(
                                 mainAxisAlignment:
@@ -220,16 +229,19 @@ class _i_amState extends State<i_am> {
                                 children: [
                                   Text(
                                     'Female',
-                                    style: TextStyle(
-                                      color: _selectedGender == 'female'
-                                          ? Colors.white
-                                          : Color(0xff3F2D20),
+                                    style: _selectedGender == 'female'?TextStyle(
+                                      color:  Colors.white,
+                                      fontWeight: FontWeight.bold,
+
                                       fontSize: 16,
-                                    ),
+                                    ):TextStyle(
+                                      color:  Colors.white,
+                                      fontSize: 16,
+                                    )
                                   ),
                                   Icon(
                                     Icons.check,
-                                    color: Colors.white,
+                                    color: _selectedGender == 'female'?Colors.white:s2.withOpacity(.2)
                                   )
                                 ],
                               ),
@@ -253,9 +265,12 @@ class _i_amState extends State<i_am> {
                               width: MediaQuery.of(context).size.width * .8,
                               decoration: BoxDecoration(
                                 color: _selectedGender == 'male'
-                                    ? Color(0xFFff85a6)
-                                    : Colors.transparent,
+                                    ? s2
+                                    : s2.withOpacity(.3),
                                 borderRadius: BorderRadius.circular(10),
+                                  border: _selectedGender != 'male'?Border.all(
+                                      color: s2
+                                  ):null
                               ),
                               child: Row(
                                 mainAxisAlignment:
@@ -263,16 +278,20 @@ class _i_amState extends State<i_am> {
                                 children: [
                                   Text(
                                     'Male',
-                                    style: TextStyle(
-                                      color: _selectedGender == 'male'
-                                          ? Colors.white
-                                          : Color(0xff3F2D20),
+                                    style:_selectedGender == 'male'?TextStyle(
+                                      color:  Colors.white,
+                                      fontWeight: FontWeight.bold,
+
                                       fontSize: 16,
-                                    ),
+                                    ):TextStyle(
+                                      color:  Colors.white,
+                                      fontSize: 16,
+                                    )
+
                                   ),
                                   Icon(
                                     Icons.check,
-                                    color: Colors.white,
+                                    color:  _selectedGender == 'male'?Colors.white:s2.withOpacity(.2)
                                   )
                                 ],
                               ),
@@ -291,14 +310,9 @@ class _i_amState extends State<i_am> {
                   Container(
                     margin: EdgeInsets.only(bottom: 50),
                     child: Center(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: main_color,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                        ),
-                        onPressed: () {
+                      child: InkWell(
+                        onTap: ()
+                        {
                           if (fast == true) {
                             fast_user();
                           } else {
@@ -308,6 +322,10 @@ class _i_amState extends State<i_am> {
                         child: Container(
                           height: MediaQuery.of(context).size.height * .06,
                           width: MediaQuery.of(context).size.width * .8,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: b2
+                          ),
                           child: Center(
                             child: Text(
                               'Continue',

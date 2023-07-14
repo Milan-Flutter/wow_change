@@ -254,9 +254,6 @@ class _botttom_navigateState extends State<botttom_navigate>
           );
         });
   }
-
-
-
   _age1() async {
     await Future.delayed(const Duration(milliseconds: 50));
     showDialog(
@@ -379,7 +376,6 @@ class _botttom_navigateState extends State<botttom_navigate>
           );
         });
   }
-
   _freecoin() async {
     await Future.delayed(const Duration(milliseconds: 50));
     showDialog(
@@ -440,12 +436,12 @@ class _botttom_navigateState extends State<botttom_navigate>
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * .02,
+                          height: MediaQuery.of(context).size.height * .04,
                         ),
                         Center(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: main_color,
+                              primary: Colors.transparent,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(40),
                                 side: BorderSide(
@@ -487,7 +483,6 @@ class _botttom_navigateState extends State<botttom_navigate>
           );
         });
   }
-
   void check() {
     userData().data().then((value1) {
       AllData? data1 = value1;
@@ -518,6 +513,7 @@ class _botttom_navigateState extends State<botttom_navigate>
     if (widget.status == '1')
     {
       _showDialog();
+
     } else if (widget.status == '0') {
       _age1();
     } else if (widget.status == '2') {
@@ -553,8 +549,8 @@ class _botttom_navigateState extends State<botttom_navigate>
       },
       child: isLodding
           ? Scaffold(
-
-              bottomNavigationBar: PersistentTabView(
+        backgroundColor: Colors.black,
+   bottomNavigationBar: PersistentTabView(
                 context,
                 controller: PersistentTabController(initialIndex: ind),
                 screens: _pages(),

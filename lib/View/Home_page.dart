@@ -2,15 +2,16 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wow/View/profile_page.dart';
 import 'package:wow/View/sign_in.dart';
+import 'package:wow/View/story_profile.dart';
 import 'package:wow/View/wallet.dart';
 import '../Api/All_Data.dart';
 import '../Controller/image_controller.dart';
@@ -121,6 +122,7 @@ class _HomeScreeenState extends State<HomeScreeen>
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     Notificationservices n1 = new Notificationservices();
@@ -142,17 +144,15 @@ class _HomeScreeenState extends State<HomeScreeen>
               ? SafeArea(
             child: Stack(
               children: [
-                Center(
-                  child: Lottie.network(
-                    animationUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+
                 Image.asset(
                   'assets/all.png', // replace with your image path
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
+                ),
+                Center(
+                  child:  SpinKitRipple(color: s2,size: 400,borderWidth: 30,),
                 ),
                 Column(
                   children: [
@@ -267,6 +267,15 @@ class _HomeScreeenState extends State<HomeScreeen>
                                 pageTransitionAnimation:
                                 PageTransitionAnimation.cupertino,
                               );
+                              pushNewScreen(
+                              context,
+                              screen: st_profile(
+                              id: "135",
+                              ),
+                              withNavBar: false,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
+                              );
                             },
                             child: Image.asset(
                               "assets/img_9.png",
@@ -280,6 +289,7 @@ class _HomeScreeenState extends State<HomeScreeen>
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .25,
                     ),
+
                     InkWell(onTap: () {
                       pushNewScreen(
                         context,

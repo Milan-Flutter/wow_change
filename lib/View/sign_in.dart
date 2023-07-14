@@ -316,11 +316,7 @@ class _SignInState extends State<SignIn> {
                                   borderRadius: BorderRadius.circular(15),
                                   gradient: b3,
                                   border: Border.all(color: s2)),
-                              child: Image.asset(
-                                "assets/img_6.png",
-                                height: 25,
-                                width: 25,
-                              ),
+                              child: Center(child: Icon(Icons.phone_android,color: Colors.white,size: 25,))
                             ),
                           ),
                           InkWell(
@@ -342,11 +338,9 @@ class _SignInState extends State<SignIn> {
 
                               ),
 
-                              child: Image.asset(
-                                "assets/img_7.png",
-                                height: 25,
-                                width: 25,
-                              ),
+                              child:Center(
+                                child: Icon(Icons.email_rounded,color: Colors.white,size: 25,),
+                              )
                             ),
                           )
                         ],

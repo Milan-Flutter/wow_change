@@ -98,6 +98,7 @@ class _walletState extends State<wallet> {
                     children: [
                       InkWell(
                         onTap: () {
+
                           Navigator.pop(context);
                         },
                         child: Container(

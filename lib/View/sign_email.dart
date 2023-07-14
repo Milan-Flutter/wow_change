@@ -79,10 +79,10 @@ class _sign_emailState extends State<sign_email> {
         if (messege == 'Login Successful') {
           update_token(token.toString(), User_id.toString());
           print("dgasesetg" + f_id.toString());
-
+          profile(User_id.toString());
           if (f_id == null) {
             print("jhgkaGgjHglg");
-            profile(User_id.toString());
+
             FirebaseAuth.instance
                 .createUserWithEmailAndPassword(
                 email: email.toString(), password: password.toString())

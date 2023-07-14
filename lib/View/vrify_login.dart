@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constant.dart';
@@ -91,16 +92,17 @@ class _otp_loginState extends State<otp_login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: SafeArea(
         child: Container(
           child: Stack(
             children: [
-              Image.asset(
-                'assets/all.png', // replace with your image path
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
+              // Image.asset(
+              //   'assets/all.png', // replace with your image path
+              //   fit: BoxFit.cover,
+              //   width: double.infinity,
+              //   height: double.infinity,
+              // ),
               SingleChildScrollView(
                 child: Column(
                   children: [
@@ -122,7 +124,7 @@ class _otp_loginState extends State<otp_login> {
                           "App Logo",
                           style: TextStyle(
                               fontSize: 30,
-                              color: Color(0xff111A41),
+                              color:font,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -133,7 +135,7 @@ class _otp_loginState extends State<otp_login> {
                     Text(
                       "OTP Verification",
                       style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                          TextStyle(fontSize: 30,color:font, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .01,
@@ -142,7 +144,7 @@ class _otp_loginState extends State<otp_login> {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Text(
                         "Type the verification code we’ve sent you",
-                        style: TextStyle(fontSize: 11),
+                        style: TextStyle(color:font,fontSize: 11),
                       ),
                     ),
                     SizedBox(
@@ -153,13 +155,24 @@ class _otp_loginState extends State<otp_login> {
                       child: OTPTextField(
                         controller: _otpController,
                         length: 6,
+                        otpFieldStyle: OtpFieldStyle(
+                          backgroundColor: s2.withOpacity(.3),
+                          enabledBorderColor: s2.withOpacity(.3),
+                          borderColor: s2,
+                          focusBorderColor: s2,
+                          disabledBorderColor: s2
+
+                        ),
                         width: MediaQuery.of(context).size.width,
                         fieldWidth: 45,
                         style: TextStyle(
                           fontSize: 17,
+                          color: Colors.white
                         ),
+
                         textFieldAlignment: MainAxisAlignment.spaceAround,
                         fieldStyle: FieldStyle.box,
+
                         onCompleted: otp,
                       ),
                     ),
@@ -182,11 +195,11 @@ class _otp_loginState extends State<otp_login> {
                             Text(
                               "I didn’t get the ",
                               style: TextStyle(
-                                  fontSize: 12, color: Color(0xff73665C)),
+                                  fontSize: 12,color:font,),
                             ),
                             Text(
                               "Code",
-                              style: TextStyle(fontSize: 12, color: main_color),
+                              style: TextStyle(fontSize: 12, color: s2),
                             )
                           ],
                         ),
@@ -198,19 +211,18 @@ class _otp_loginState extends State<otp_login> {
                     Container(
                       margin: EdgeInsets.only(bottom: 50),
                       child: Center(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: main_color,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                          ),
-                          onPressed: () async {
+                        child: InkWell(
+                          onTap: ()
+                          {
                             _signInWithOTP();
                           },
                           child: Container(
                             height: MediaQuery.of(context).size.height * .06,
                             width: MediaQuery.of(context).size.width * .75,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              gradient: b2
+                            ),
                             child: Center(
                               child: Text(
                                 'Login',
