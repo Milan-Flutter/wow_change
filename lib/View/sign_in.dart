@@ -392,6 +392,12 @@ class _SignInState extends State<SignIn> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Text(
+                          "Terms of use",
+                          style: TextStyle(color: s2, fontSize: 12),
+                        ),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * .09),
                         TextButton(
                           onPressed: () {
                             _launchURL('https://www.mechodal.com/');
@@ -401,12 +407,6 @@ class _SignInState extends State<SignIn> {
                             style: TextStyle(color: s2, fontSize: 12),
                           ),
                         ),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width * .09),
-                        Text(
-                          "Privacy Policy",
-                          style: TextStyle(color: s2, fontSize: 12),
-                        )
                       ],
                     )
                   ],

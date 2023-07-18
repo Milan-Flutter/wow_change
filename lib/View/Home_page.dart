@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -121,7 +123,23 @@ class _HomeScreeenState extends State<HomeScreeen>
       }
     }
   }
+  Future<void> logout1() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+    FirebaseAuth.instance.signOut();
 
+    _googleSignIn.signOut();
+    pushNewScreen(
+      context,
+      screen: SignIn(),
+      withNavBar: false,
+      pageTransitionAnimation:
+      PageTransitionAnimation
+          .cupertino,
+    );
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +188,10 @@ class _HomeScreeenState extends State<HomeScreeen>
                                 onTap: () {
                                   fastU
                                       ? Fluttertoast.showToast(
-                                      msg: "Please login")
+                                      msg: "Please login",
+
+
+                                  )
                                       : pushNewScreen(
                                     context,
                                     screen: profile(),
@@ -258,7 +279,17 @@ class _HomeScreeenState extends State<HomeScreeen>
                               )
                             ],
                           ),
-                          InkWell(
+                          fastU?InkWell(
+                            onTap: ()
+                            {
+                              logout1();
+                            },
+                            child: CircleAvatar(
+                              radius: 25,
+                              backgroundColor: s2,
+                              child: Center(child: Icon(Icons.logout,color: Colors.white,size: 25,)),
+                            ),
+                          ):InkWell(
                             onTap: () {
                               pushNewScreen(
                                 context,
@@ -267,15 +298,15 @@ class _HomeScreeenState extends State<HomeScreeen>
                                 pageTransitionAnimation:
                                 PageTransitionAnimation.cupertino,
                               );
-                              pushNewScreen(
-                              context,
-                              screen: st_profile(
-                              id: "135",
-                              ),
-                              withNavBar: false,
-                              pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                              );
+                              // pushNewScreen(
+                              // context,
+                              // screen: st_profile(
+                              // id: "135",
+                              // ),
+                              // withNavBar: false,
+                              // pageTransitionAnimation:
+                              // PageTransitionAnimation.cupertino,
+                              // );
                             },
                             child: Image.asset(
                               "assets/img_9.png",

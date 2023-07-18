@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,21 +35,325 @@ class profile extends StatefulWidget {
 
 class _profileState extends State<profile> {
   File? _pickedImage;
-  File? _compressedImage;
   final _picker = ImagePicker();
   String? uid;
   var planres;
   profile_data controller = Get.put(profile_data());
-
   getStory? getst;
   getpost? getpo;
   AllData? data1;
-
   bool st = false;
   bool po = false;
   bool all = false;
   bool abc = true;
   bool host = false;
+
+  _Show_post(String img,id1) async {
+    await Future.delayed(const Duration(milliseconds: 50));
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(
+            builder: (BuildContext context,
+                void Function(void Function()) setState) {
+
+              Future<void> edit_post(File imageFile)
+              async {
+                Uri apiUrl = Uri.parse('https://mechodalgroup.xyz/whoclone/api/update_post_image.php');
+                var request = http.MultipartRequest('POST', apiUrl);
+
+                request.files.add(
+                    await http.MultipartFile.fromPath('link', imageFile.path.toString()));
+                request.fields['id'] = id1.toString();
+                var response = await request.send();
+
+                if (response.statusCode == 200) {
+                  var responsed = await http.Response.fromStream(response);
+                  final responseData = json.decode(responsed.body);
+
+                  debugPrint('rrre' + responseData.toString());
+                  Fluttertoast.showToast(msg: "Edit Post Succesfully");
+
+                  setState(() {
+                    gp();
+                  });
+                  Navigator.pop(context);
+                }
+                else {
+                  debugPrint('Error submitting form data: ${response.statusCode}');
+                  Fluttertoast.showToast(msg: "Post was not Added ");
+                }
+              }
+
+
+
+              Future<void> delete_app()
+              async {
+                var response = await post(
+                    Uri.parse("https://mechodalgroup.xyz/whoclone/api/delete_post.php"),
+                    body: {'id': id1.toString(),});
+                if(response.statusCode == 200)
+                {
+                  var data=jsonDecode(response.body);
+                  var message=data['status'];
+                  if(message == "Post Deleted")
+                  {
+
+                    setState(() {
+                      gp();
+                    });
+                    controller.harsh();
+                    Navigator.pop(context);
+                    Fluttertoast.showToast(msg: "Post Deleted");
+
+                  }
+                  else
+                  {
+                    Fluttertoast.showToast(msg: "Please try Agin");
+                    Navigator.pop(context);
+                  }
+                }
+              }
+              Future<void> _get_pic() async {
+                debugPrint("objectlllllllllllllll");
+                final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+
+                if (pickedFile != null) {
+                  setState(() {
+                    _pickedImage = File(pickedFile.path);
+                  });
+                  edit_post(_pickedImage!);
+                }
+              }
+              return Scaffold(
+              backgroundColor: Colors.transparent,
+                body: Stack(
+                    children: [
+                    BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                            child: Container(
+                              color: Colors.black.withOpacity(0.2),
+                              height: double.infinity,
+                              width: double.infinity,// Adjust opacity as needed
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(left: 20,top: 20),
+                            padding: EdgeInsets.all(10),
+                            height:
+                            MediaQuery.of(context).size.height * .06,
+                            width:
+                            MediaQuery.of(context).size.width * .13,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Color(0xffFFFFFF)),
+                            child: Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color:s2,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height * .15,),
+
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20 ),
+                          height: MediaQuery.of(context).size.height * .4,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(img.toString()),
+                                fit: BoxFit.cover,
+                              ),
+                              borderRadius: BorderRadius.circular(20)
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height * .15,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                _get_pic();
+                              },
+                              child: Container(
+
+                                padding: EdgeInsets.all(10),
+                                height:
+                                MediaQuery.of(context).size.height * .06,
+                                width:
+                                MediaQuery.of(context).size.width * .13,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Color(0xffFFFFFF),
+                                    border: Border.all(color: s2)),
+                                child: Icon(Icons.mode_edit_rounded,color: s2,)
+                              ),
+                            ),
+                            SizedBox(width: 5,),
+                            InkWell(
+                              onTap: () {
+                                delete_app();
+                              },
+                              child: Container(
+
+
+                                height:
+                                MediaQuery.of(context).size.height * .06,
+                                width:
+                                MediaQuery.of(context).size.width * .13,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Color(0xffFFFFFF),
+                                    border: Border.all(color: s2)),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.delete_outline_outlined,
+                                    color: s2,
+                                    size: 30,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        });
+  }
+
+  _Show_story(String img,id1) async {
+    await Future.delayed(const Duration(milliseconds: 50));
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(
+            builder: (BuildContext context,
+                void Function(void Function()) setState) {
+
+              void init()
+              {
+                Future.delayed(Duration(seconds: 5)).then((_)
+                {
+                  Navigator.pop(context);
+                });
+
+              }
+              init();
+              Future<void> delete_app()
+              async {
+                var response = await post(
+                    Uri.parse("https://mechodalgroup.xyz/whoclone/api/delete_story.php"),
+                    body: {'id': id1.toString(),});
+                if(response.statusCode == 200)
+                {
+                  var data=jsonDecode(response.body);
+                  var message=data['status'];
+                  if(message == "Post Deleted")
+                  {
+
+                    setState(() {
+                      gs1();
+                    });
+                    Navigator.pop(context);
+                    Fluttertoast.showToast(msg: "Story Deleted");
+
+                  }
+                  else
+                  {
+                    Fluttertoast.showToast(msg: "Please try Agin");
+                    Navigator.pop(context);
+                  }
+                }
+              }
+
+
+              return Scaffold(
+
+                body: Stack(
+                  children: [
+                    Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(img!.toString()),
+                              fit: BoxFit.cover
+                          )
+                      ),
+
+                    ),
+                    SafeArea(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.height * .05,),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 40),
+                        child: InkWell(
+                          onTap: () {
+                            delete_app();
+                          },
+                          child: Container(
+                            height:
+                            MediaQuery.of(context).size.height * .06,
+                            width:
+                            MediaQuery.of(context).size.width * .13,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                             border: Border.all(color: s2)
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.delete_outline_outlined,
+                                color: s2,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    /*Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        margin: EdgeInsets.only(right: 40,top: 20),
+                        child: InkWell(
+                          onTap: ()
+                          {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(Icons.close,color: Colors.black26,size: 40,),
+                        ),
+                      ),
+                    )*/
+
+                  ],
+                ),
+              );;
+            },
+          );
+        });
+  }
 
   Future<void> sendPost(File imageFile) async {
     debugPrint("qq" + imageFile.toString());
@@ -68,6 +374,7 @@ class _profileState extends State<profile> {
       setState(() {
         gp();
       });
+      controller.harsh();
     } else {
       debugPrint('Error submitting form data: ${response.statusCode}');
       Fluttertoast.showToast(msg: "Post was not Added ");
@@ -99,7 +406,6 @@ class _profileState extends State<profile> {
   }
 
   Future<void> _getImage() async {
-    debugPrint("objectlllllllllllllll");
     final pickedFile = await _picker.getImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
@@ -111,7 +417,6 @@ class _profileState extends State<profile> {
   }
 
   Future<void> _getImage1() async {
-    debugPrint("objectlllllllllllllll");
     final pickedFile = await _picker.getImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
@@ -126,7 +431,10 @@ class _profileState extends State<profile> {
       getpo = value;
       setState(() {
         po = true;
-        if (getpo!.data!.length == null) {
+        print("lkfjdgg;okgjrg");
+        print(getpo!.data!.length.toString());
+        if (getpo!.data!.length == "0")
+        {
           setState(() {
             abc = true;
           });
@@ -137,8 +445,8 @@ class _profileState extends State<profile> {
         }
       });
     });
-  }
 
+  }
   void gs() {
     getstory().getst().then((value) {
       getst = value;
@@ -147,7 +455,14 @@ class _profileState extends State<profile> {
       });
     });
   }
-
+  void gs1() {
+    getstory().getst().then((value) {
+      getst = value;
+      setState(() {
+        st = true;
+      });
+    });
+  }
   void profile() {
     userData().data().then((value) {
       data1 = value;
@@ -176,11 +491,11 @@ class _profileState extends State<profile> {
     sharedPreferences.clear();
     GoogleSignIn _googleSignIn = GoogleSignIn();
     FirebaseAuth.instance.signOut();
-
     _googleSignIn.signOut();
     Navigator.push(context,
         PageTransition(type: PageTransitionType.topToBottom, child: SignIn()));
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -518,19 +833,26 @@ class _profileState extends State<profile> {
                                           int index) {
                                         return InkWell(
                                           onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                    type:
-                                                    PageTransitionType
-                                                        .topToBottom,
-                                                    child:
-                                                    story_view_page(
-                                                      emg: getst!
-                                                          .data![index]
-                                                          .link
-                                                          .toString(),
-                                                    )));
+                                            _Show_story( getst!
+                                                .data![index]
+                                                .link
+                                                .toString(), getst!
+                                                .data![index]
+                                                .id
+                                                .toString());
+                                            // Navigator.push(
+                                            //     context,
+                                            //     PageTransition(
+                                            //         type:
+                                            //         PageTransitionType
+                                            //             .topToBottom,
+                                            //         child:
+                                            //         story_view_page(
+                                            //           emg: getst!
+                                            //               .data![index]
+                                            //               .link
+                                            //               .toString(),
+                                            //         )));
                                           },
                                           child: Padding(
                                             padding:
@@ -649,19 +971,29 @@ class _profileState extends State<profile> {
                                       ),
                                     ),
                                   )
-                                      : Container(
+                                      : InkWell(
+                                    onTap: ()
+                                    {
+                                      _Show_post(getpo!
+                                          .data![index - 1].link
+                                          .toString(),getpo!
+                                          .data![index - 1].id
+                                          .toString());
+                                    },
+                                        child: Container(
                                     width: 150,
                                     height: 150,
                                     decoration: BoxDecoration(
 
-                                        image: DecorationImage(
-                                            image: NetworkImage(getpo!
-                                                .data![index - 1].link
-                                                .toString()),
-                                            fit: BoxFit.cover),
-                                        borderRadius:
-                                        BorderRadius.circular(20)),
-                                  ));
+                                          image: DecorationImage(
+                                              image: NetworkImage(getpo!
+                                                  .data![index - 1].link
+                                                  .toString()),
+                                              fit: BoxFit.cover),
+                                          borderRadius:
+                                          BorderRadius.circular(20)),
+                                  ),
+                                      ));
                             },
                           ))
                     ],

@@ -11,6 +11,7 @@ import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import '../../Api/All_Data.dart';
 import '../../Controller/profile_data.dart';
 import '../../Model/All_Data.dart';
+import '../../constant.dart';
 
 class MyCall extends StatefulWidget {
   const MyCall({
@@ -121,6 +122,7 @@ class _MyCallState extends State<MyCall> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: all
           ? WillPopScope(
               onWillPop: () async {
@@ -455,7 +457,7 @@ class _MyCallState extends State<MyCall> {
             )
           : Center(
               child: CircularProgressIndicator(
-              color: Color(0xffFF85A6),
+              color: s2,
             )),
     );
   }

@@ -55,101 +55,99 @@ class _sign_emailState extends State<sign_email> {
     });
   }
 
-  Future<void> LOG_IN(String email, password) async {
-    try {
-      Response response = await post(
-          Uri.parse(
-              "https://mechodalgroup.xyz/whoclone/api/host_login_select.php"),
-          body: {'email': email.toString(), 'password': password.toString()});
-      Notificationservices f1 = new Notificationservices();
-      setState(() {
-        f1.getDevicesToken().then((value) => ({
-          token = value,
-          print("kGHfAfAf"),
-          print("azbc" + token.toString()),
-          print(value)
-        }));
-      });
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body.toString());
-        print(data);
-        messege = (data['status']);
-        User_id = data['id'];
+  Future<void> LOG_IN() async
+  {
+    print("Step 2");
+    Response response = await post(
+        Uri.parse(
+            "https://mechodalgroup.xyz/whoclone/api/host_login_select.php"),
+        body: {'email': _Emailcontroller.text.toString(), 'password': _passcontroller.text.toString()});
+    Notificationservices f1 = new Notificationservices();
+    setState(() {
+      f1.getDevicesToken().then((value) => ({
+        token = value,
+        print("kGHfAfAf"),
+        print("azbc" + token.toString()),
+        print(value)
+      }));
+    });
+    if (response.statusCode == 200) {
+      print("Step 2");
+      var data = jsonDecode(response.body.toString());
+      print(data);
+      messege = (data['status']);
+      User_id = data['id'];
 
-        if (messege == 'Login Successful') {
-          update_token(token.toString(), User_id.toString());
-          print("dgasesetg" + f_id.toString());
-          profile(User_id.toString());
-          if (f_id == null) {
-            print("jhgkaGgjHglg");
+      if (messege == 'Login Successful') {
+        update_token(token.toString(), User_id.toString());
+        print("dgasesetg" + f_id.toString());
+        profile(User_id.toString());
+        print("sdijbakdjnkij"+f_id.toString());
+        if (f_id == "") {
+          print("jhgkaGgjHglg");
 
-            FirebaseAuth.instance
-                .createUserWithEmailAndPassword(
-                email: email.toString(), password: password.toString())
-                .then((value) {
-              FirebaseFirestore.instance
-                  .collection("users")
-                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                  .set({
-                "name": u_name.toString(),
-                "email": email.toString(),
-                "status": "Unavalible",
-                "w_id": User_id.toString(),
-                "uid": FirebaseAuth.instance.currentUser!.uid.toString(),
-              }).then((value) {
-                print("lkSZJgbl");
-              });
-            }).catchError((e) {
-              print(e);
+          FirebaseAuth.instance
+              .createUserWithEmailAndPassword(
+              email:  _Emailcontroller.text.toString(), password: _passcontroller.text.toString())
+              .then((value) {
+            FirebaseFirestore.instance
+                .collection("users")
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .set({
+              "name": u_name.toString(),
+              "email":  _Emailcontroller.text.toString(),
+              "status": "Unavalible",
+              "w_id": User_id.toString(),
+              "uid": FirebaseAuth.instance.currentUser!.uid.toString(),
+            }).then((value) {
+              print("lkSZJgbl");
             });
+          }).catchError((e) {
+            print(e);
+          });
 
-            print("fghiuafliESg" +
-                FirebaseAuth.instance.currentUser!.uid.toString());
-            Response response = await post(
-                Uri.parse(
-                    "https://mechodalgroup.xyz/safe4u/apis/host_insert_id.php"),
-                body: {
-                  'id': User_id.toString(),
-                  'f_id': FirebaseAuth.instance.currentUser!.uid.toString(),
-                });
+          print("fghiuafliESg" +
+              FirebaseAuth.instance.currentUser!.uid.toString());
+          Response response = await post(
+              Uri.parse(
+                  "https://mechodalgroup.xyz/safe4u/apis/host_insert_id.php"),
+              body: {
+                'id': User_id.toString(),
+                'f_id': FirebaseAuth.instance.currentUser!.uid.toString(),
+              });
+          var data = jsonDecode(response.body.toString());
+          print("jhfgdyDU" + data);
+          if (response.statusCode == 200) {
             var data = jsonDecode(response.body.toString());
             print("jhfgdyDU" + data);
-            if (response.statusCode == 200) {
-              var data = jsonDecode(response.body.toString());
-              print("jhfgdyDU" + data);
-              messege = (data['message']);
-            }
+            messege = (data['message']);
           }
-
-          Fluttertoast.showToast(msg: "Login Successful");
-          getStorage.write('Id', User_id);
-          SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-          sharedPreferences.setBool("isLogin", true);
-          sharedPreferences.setString("user", "host");
-
-          SharedPreferences SUId = await SharedPreferences.getInstance();
-          print('uuu' + User_id.toString());
-          SUId.setString("user_id", User_id.toString());
-          var abc = SUId.getString('user_id');
-          print('sss' + abc.toString());
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => botttom_navigate(
-                status: '3',
-              )));
-        } else {
-          Fluttertoast.showToast(msg: "Invalid Input");
         }
+
+        Fluttertoast.showToast(msg: "Login Successful");
+        getStorage.write('Id', User_id);
+        SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+        sharedPreferences.setBool("isLogin", true);
+        sharedPreferences.setString("user", "host");
+
+        SharedPreferences SUId = await SharedPreferences.getInstance();
+        print('uuu' + User_id.toString());
+        SUId.setString("user_id", User_id.toString());
+        var abc = SUId.getString('user_id');
+        print('sss' + abc.toString());
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => botttom_navigate(
+              status: '3',
+            )));
       } else {
-        print("Invalid Input");
+        Fluttertoast.showToast(msg: "Invalid Input");
       }
-    } catch (e) {
-      if (messege == "Invalid Email Address") {
-        Fluttertoast.showToast(msg: "Invalid Email Address");
-      }
-      print("login failled");
-      print('error' + e.toString());
+    } else
+    {
+      print("Invalid Input");
     }
+
   }
 
   TextEditingController _Emailcontroller = TextEditingController();
@@ -205,7 +203,7 @@ class _sign_emailState extends State<sign_email> {
                             height: MediaQuery.of(context).size.height * .02,
                           ),
                           Text(
-                            "Sing In with Email",
+                            "Sign In with Email",
                             style: TextStyle(
                                 fontSize: 28,
                                 color: font,
@@ -230,7 +228,7 @@ class _sign_emailState extends State<sign_email> {
                                   color: font
                               ),
                               decoration: InputDecoration(
-                                hintText: 'Your Your Name',
+                                hintText: 'Your Your Email',
                                 hintStyle: TextStyle(
                                     fontSize: 12, color: font),
                                 contentPadding: EdgeInsets.symmetric(
@@ -328,8 +326,7 @@ class _sign_emailState extends State<sign_email> {
                                   InkWell(
                                     onTap: () {
                                       print("jkxczvjfdgdgSDg");
-                                      LOG_IN(_Emailcontroller.text,
-                                          _passcontroller.text);
+                                      LOG_IN();
                                     },
                                     child: Container(
                                       height:

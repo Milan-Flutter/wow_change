@@ -7,6 +7,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:wow/View/profile_page.dart';
 import '../../../Api/All_Data.dart';
 import '../../../Model/All_Data.dart';
+import '../../../constant.dart';
 import '../live_stream_page.dart';
 
 class live_page_host extends StatefulWidget {
@@ -81,6 +82,7 @@ class _live_page_hostState extends State<live_page_host>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: isloding
           ? WillPopScope(
               onWillPop: () async {
@@ -252,7 +254,7 @@ class _live_page_hostState extends State<live_page_host>
             )
           : Center(
               child: CircularProgressIndicator(
-              color: Color(0xffFF85A6),
+              color:s2,
             )),
     );
   }

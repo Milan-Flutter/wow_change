@@ -85,6 +85,7 @@ class _PickupCallPageState extends State<PickupCallPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: Stack(
         children: [
           Image.asset(

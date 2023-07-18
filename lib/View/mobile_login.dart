@@ -163,6 +163,8 @@ class _mobile_loginState extends State<mobile_login> {
                           } else {
                             Fluttertoast.showToast(
                               msg: "Enter Valid Number",
+                              backgroundColor: Colors.white,
+                              textColor: s2
                             );
                           }
                         },

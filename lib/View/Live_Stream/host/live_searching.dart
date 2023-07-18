@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Api/All_Data.dart';
 import '../../../Model/All_Data.dart';
+import '../../../constant.dart';
 import '../../bottom_navigation.dart';
 
 class host_live_searching extends StatefulWidget {
@@ -33,6 +34,7 @@ class _host_live_searchingState extends State<host_live_searching> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: all
           ? SafeArea(
               child: Stack(
@@ -153,7 +155,7 @@ class _host_live_searchingState extends State<host_live_searching> {
             )
           : Center(
               child: CircularProgressIndicator(
-              color: Color(0xffFF85A6),
+              color: s2,
             )),
     );
   }
