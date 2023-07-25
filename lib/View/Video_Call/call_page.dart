@@ -131,9 +131,9 @@ class _MyCallState extends State<MyCall> {
               child: Stack(
                 children: [
                   ZegoUIKitPrebuiltCall(
-                      appID: 90784165,
+                      appID: 1779662113,
                       appSign:
-                          "21c11fc3e936a1afc11429fc2db77417cb41c247cc304b2f15b8df345d4ee2fb", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+                          "4d873440ec997846b7e38f6deae201c048771f56ad21304a2743f7072d155bef", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
                       userID: widget.userID.toString(),
                       userName: widget.Username.toString(),
                       callID: widget.callID.toString(),
@@ -268,8 +268,7 @@ class _MyCallState extends State<MyCall> {
                                                                   left: 5),
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: Color(
-                                                                0xffE32753),
+                                                           gradient: b1,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .only(
@@ -327,7 +326,9 @@ class _MyCallState extends State<MyCall> {
                                                           .size
                                                           .width *
                                                       1,
-                                                  color: Color(0xffEDEEF1),
+                                                 decoration: BoxDecoration(
+                                                   gradient: b1,
+                                                 ),
                                                   child: GridView.builder(
                                                     shrinkWrap: true,
                                                     primary: true,

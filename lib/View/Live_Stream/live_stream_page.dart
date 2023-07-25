@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 import '../../Api/All_Data.dart';
 import '../../Model/All_Data.dart';
+import '../../constant.dart';
 
 class live_Stream extends StatefulWidget {
   const live_Stream(
@@ -85,6 +86,7 @@ class _live_StreamState extends State<live_Stream> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
         body: isloding
             ? WillPopScope(
                 onWillPop: () async {
@@ -94,9 +96,9 @@ class _live_StreamState extends State<live_Stream> {
                     child: Stack(
                   children: [
                     ZegoUIKitPrebuiltLiveStreaming(
-                      appID: 444698846,
+                      appID: 603674895,
                       appSign:
-                          'e61a178307c20d0092a1e5de9d6eb65344bc38da424b2ae073c27610133b2025',
+                          'cb9abdc76863b79c39b5edb24142a2cf96033168122058ff8015eb64b65fd381',
                       userID: widget.id.toString(),
                       userName: widget.name.toString(),
                       liveID: widget.liveid.toString(),
@@ -198,8 +200,7 @@ class _live_StreamState extends State<live_Stream> {
                                                                     left: 5),
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: Color(
-                                                                  0xffE32753),
+                                                            gradient: b1,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .only(
@@ -259,7 +260,9 @@ class _live_StreamState extends State<live_Stream> {
                                                                 .size
                                                                 .width *
                                                             1,
-                                                    color: Color(0xffEDEEF1),
+                                                    decoration: BoxDecoration(
+                                                      gradient: b1
+                                                    ),
                                                     child: GridView.builder(
                                                       shrinkWrap: true,
                                                       primary: true,
@@ -389,7 +392,7 @@ class _live_StreamState extends State<live_Stream> {
               )
             : Center(
                 child: CircularProgressIndicator(
-                color: Color(0xffFF85A6),
+                color: s2,
               )));
   }
 }

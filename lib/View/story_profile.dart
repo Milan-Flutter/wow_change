@@ -964,7 +964,7 @@ class _st_profileState extends State<st_profile> {
                                 _chatDailog();
                               },
                               child: Image.asset("assets/img_17.png",height: 50,width: 50,),
-                            ):Image.asset("assets/img_10.png",height: 50,width: 50,),
+                            ):Image.asset("assets/img_6.png",height: 50,width: 50,),
 
                             follow ?InkWell(
                               onTap: (){
