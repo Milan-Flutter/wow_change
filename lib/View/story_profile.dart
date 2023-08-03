@@ -223,7 +223,7 @@ class _st_profileState extends State<st_profile> {
       }
       else
       {
-        Fluttertoast.showToast(msg: "User are not Online!!");
+        Fluttertoast.showToast(msg: "Host is in another call please try again after some time ");
       }
 
     }
@@ -651,7 +651,7 @@ class _st_profileState extends State<st_profile> {
   async {
     var response = await post(
         Uri.parse("https://mechodalgroup.xyz/whoclone/api/un_follower.php"),
-        body: {'follower_id': widget.id.toString(), 'following_id': uid.toString()});
+        body: {'follower_id':uid.toString() , 'following_id': widget.id.toString()});
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body.toString());
       print(data);
@@ -680,14 +680,16 @@ class _st_profileState extends State<st_profile> {
 
     var response = await post(
         Uri.parse("https://mechodalgroup.xyz/whoclone/api/add_chat.php"),
-        body: {'followerId': uid.toString(), 'followingId': widget.id.toString()});
+        body: {'follower_id': uid.toString(), 'following_id': widget.id.toString()});
+    print("followingIdfollowingId");
+
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body.toString());
       print(data);
       var messege = (data['message']);
 
 
-      if (messege == 'Chat added successfully')
+      if (messege == 'Data columns updated successfully')
       {
         setState(() {
           chat=false;
@@ -728,14 +730,11 @@ class _st_profileState extends State<st_profile> {
       debugPrint("HAFJKAFafAW");
       print(data);
       var messege = (data['message']);
-
-
-      if (messege == 'Alredey Exist')
+    if (messege == 'Alredey Exist')
       {
         setState(() {
           chat=false;
         });
-
       }else if(messege == "User is not Exist")
       {
         setState(() {
@@ -744,16 +743,11 @@ class _st_profileState extends State<st_profile> {
 
       }
 
-
     } else {
       debugPrint("Invalid Input");
     }
-
-
     check_followe();
-
-
-  }
+ }
 
   Future<void> check_followe()
   async {
@@ -785,15 +779,8 @@ class _st_profileState extends State<st_profile> {
         setState(() {
           follow=true;
         });
-
-      }
-
-    }
-
-
-
-
-  }
+      }}
+ }
 
   @override
   Widget build(BuildContext context) {

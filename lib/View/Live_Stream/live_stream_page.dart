@@ -55,25 +55,23 @@ class _live_StreamState extends State<live_Stream> {
     }
   }
 
-  void data1() {
-    setState(() async {
-      if (type == "0") {
-        Response response = await post(
-            Uri.parse(
-                "https://mechodalgroup.xyz/whoclone/api/update_register_host_status.php"),
-            body: {'id': widget.id.toString(), 'host_streem': "deactive"});
-        if (response.statusCode == 200) {
-          var data = jsonDecode(response.body.toString());
-          print("jkvbf;lsdhnsdthsd");
-          print(data);
-          var messege = (data['message']);
-          if (messege == "Updated successfully") {
-          } else {
-            Fluttertoast.showToast(msg: "Please try again..");
-          }
+  Future<void> data1() async {
+    if (type == "0") {
+      Response response = await post(
+          Uri.parse(
+              "https://mechodalgroup.xyz/whoclone/api/update_register_host_status.php"),
+          body: {'id': widget.id.toString(), 'host_streem': "deactive"});
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body.toString());
+        print("jkvbf;lsdhnsdthsd");
+        print(data);
+        var messege = (data['message']);
+        if (messege == "Updated successfully") {
+        } else {
+          Fluttertoast.showToast(msg: "Please try again..");
         }
       }
-    });
+    }
   }
 
   @override

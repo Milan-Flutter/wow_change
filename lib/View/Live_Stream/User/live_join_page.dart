@@ -36,12 +36,12 @@ class _live_page_userState extends State<live_page_user> {
   profile_data controller=Get.put(profile_data());
   List<HostLive> filteredHosts = [];
   late Map planres;
-
   String? coin;
   String? uid;
   String? uname;
   String? LiveId;
-  Future<void> plan1() async {
+  Future<void> plan1()
+  async {
     var url = Uri.parse('https://mechodalgroup.xyz/whoclone/api/get_host_active.php');
     var response = await post(url);
     if (response.statusCode == 200) {
@@ -60,7 +60,8 @@ class _live_page_userState extends State<live_page_user> {
     }
   }
 
-  void filterHosts(String searchTerm) {
+  void filterHosts(String searchTerm)
+  {
     setState(() {
       filteredHosts = hosts
           .where((host) =>
@@ -72,7 +73,8 @@ class _live_page_userState extends State<live_page_user> {
 
 
 
-  _popUpEnter() async {
+  _popUpEnter()
+  async {
     await Future.delayed(const Duration(milliseconds: 50));
     showDialog(
         context: context,
@@ -89,12 +91,7 @@ class _live_page_userState extends State<live_page_user> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                       gradient: LinearGradient(
-                        colors: [
-
-                          s2,
-                          s1,
-
-                        ],
+                        colors: [s2, s1,],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       )
@@ -178,22 +175,19 @@ class _live_page_userState extends State<live_page_user> {
                   ),
                 ),
               );
-
         });
   }
 
 
   @override
-  void initState() {
-
+  void initState()
+  {
     coin=controller.coin.toString();
     uid=controller.uid.toString();
     uname=controller.name.toString();
     plan1();
     filteredHosts = hosts;
-
-
-    super.initState();
+   super.initState();
   }
 
 
@@ -235,16 +229,17 @@ class _live_page_userState extends State<live_page_user> {
     }
   }
   Future<void> _refreshData() async
-  {  hosts.clear();
-  filteredHosts.clear();
+  {
+
+    hosts.clear();
+    filteredHosts.clear();
     plan1();
     filteredHosts = hosts;
     setState(() {
 
     });
-
-
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

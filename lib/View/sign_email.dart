@@ -44,15 +44,9 @@ class _sign_emailState extends State<sign_email> {
     }
   }
 
-  void profile(String uid) {
-    userData().data3(id: uid.toString()).then((value) {
-      data1 = value;
-      setState(() {
-        u_name = data1!.data![0].name.toString();
-        f_id = data1!.data![0].f_id.toString();
-        print(f_id);
-      });
-    });
+   profile(String uid) {
+
+
   }
 
   Future<void> LOG_IN() async
@@ -81,9 +75,22 @@ class _sign_emailState extends State<sign_email> {
       if (messege == 'Login Successful') {
         update_token(token.toString(), User_id.toString());
         print("dgasesetg" + f_id.toString());
-        profile(User_id.toString());
+
+         await userData().data3(id: User_id.toString()).then((value) {
+          setState(() {
+            data1 = value;
+            u_name = data1!.data![0].name.toString();
+            f_id = data1!.data![0].f_id.toString();
+            print("hsFGsgzhdVBIKsdhvoUH");
+            print("object"+f_id.toString());
+            print(data1!.data![0].f_id.toString());
+            print(f_id);
+
+          });
+
+        });
         print("sdijbakdjnkij"+f_id.toString());
-        if (f_id == "") {
+        if (f_id == "0") {
           print("jhgkaGgjHglg");
 
           FirebaseAuth.instance
@@ -106,17 +113,16 @@ class _sign_emailState extends State<sign_email> {
             print(e);
           });
 
-          print("fghiuafliESg" +
-              FirebaseAuth.instance.currentUser!.uid.toString());
+
           Response response = await post(
               Uri.parse(
-                  "https://mechodalgroup.xyz/safe4u/apis/host_insert_id.php"),
+                  "https://mechodalgroup.xyz/whoclone/api/host_insert_id.php"),
               body: {
                 'id': User_id.toString(),
                 'f_id': FirebaseAuth.instance.currentUser!.uid.toString(),
               });
-          var data = jsonDecode(response.body.toString());
-          print("jhfgdyDU" + data);
+          print("123");
+          print(response.body);
           if (response.statusCode == 200) {
             var data = jsonDecode(response.body.toString());
             print("jhfgdyDU" + data);
@@ -149,7 +155,6 @@ class _sign_emailState extends State<sign_email> {
     }
 
   }
-
   TextEditingController _Emailcontroller = TextEditingController();
   TextEditingController _passcontroller = TextEditingController();
   @override

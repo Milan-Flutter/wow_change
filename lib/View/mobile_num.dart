@@ -19,6 +19,7 @@ class _mobile_numState extends State<mobile_num>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bg,
       body: SafeArea(
         child: Container(
           child: Stack(
@@ -50,7 +51,7 @@ class _mobile_numState extends State<mobile_num>
                           "App Logo",
                           style: TextStyle(
                               fontSize: 30,
-                              color: Color(0xff111A41),
+                              color:font,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -81,27 +82,47 @@ class _mobile_numState extends State<mobile_num>
                       child: TextField(
                         controller: _phoneController,
                         keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.phone_android),
-                          hintText: '99999 99999',
-                          hintStyle:
-                              TextStyle(fontSize: 12, color: Color(0xff3F2D20)),
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 15),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              color: main_color,
-                            ),
+                          style: TextStyle(
+                            color: font,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              color:
-                                  main_color, // Set the border color when the TextField is focused
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.phone_android, color: font,),
+                            hintText: '99999 99999',
+                            hintStyle:
+                            TextStyle(fontSize: 12, color: font,),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color: main_color,
+                              ),
                             ),
-                          ),
-                        ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color:
+                                s2, // Set the border color when the TextField is focused
+                              ),
+
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color:
+                                s2, // Set the border color when the TextField is focused
+                              ),
+
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color:
+                                s2, // Set the border color when the TextField is focused
+                              ),
+
+                            ),
+                          )
                       ),
                     ),
                     SizedBox(

@@ -42,29 +42,27 @@ class _spalsh_scrrenState extends State<spalsh_scrren> {
     String? id = sharedPreferences.getString("user_id");
     Notificationservices f1 = new Notificationservices();
 
-    setState(() {
-      f1.getDevicesToken().then((value) => ({
-        token = value,
-        print("kGHfAfAf"),
-        print("azbc" + token.toString()),
-        if (isLogin != null)
-          {
-            update_token(id.toString()),
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => botttom_navigate(
-                  status: '3',
-                ))),
-          }
-        else
-          {
-            print("====LOGIN ELSE"),
-            Navigator.of(context, rootNavigator: true)
-                .push(MaterialPageRoute(builder: (context) => onbording())),
-          },
-        print(value)
-      }));
-    });
 
+    f1.getDevicesToken().then((value) => ({
+      token = value,
+      print("kGHfAfAf"),
+      print("azbc" + token.toString()),
+      if (isLogin != null)
+        {
+          update_token(id.toString()),
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => botttom_navigate(
+                status: '3',
+              ))),
+        }
+      else
+        {
+          print("====LOGIN ELSE"),
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>onbording()))
+        },
+      print(value)
+    }));
     print("===>IS LOGIN=>" + isLogin.toString());
   }
 

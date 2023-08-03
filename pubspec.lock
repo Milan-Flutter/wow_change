@@ -265,6 +265,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  file_picker:
+    dependency: transitive
+    description:
+      name: file_picker
+      sha256: b85eb92b175767fdaa0c543bf3b0d1f610fe966412ea72845fe5ba7801e763ff
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.10"
   file_selector_linux:
     dependency: transitive
     description:
@@ -1318,10 +1326,10 @@ packages:
     dependency: transitive
     description:
       name: zego_express_engine
-      sha256: "82e7282d7a224c70e81709d7fc6ba9d6cc1d2b08e39a1fbeb2dc2d292cbef18a"
+      sha256: b993acff1e045eb0577655dfad52db868bc5dea3085551dc506de22b250a06b0
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.1"
+    version: "3.7.0"
   zego_plugin_adapter:
     dependency: transitive
     description:
@@ -1334,10 +1342,10 @@ packages:
     dependency: transitive
     description:
       name: zego_uikit
-      sha256: f2fad493fb40de84a559cf82a61353dc797858b688af749d5613adc2f64f9f59
+      sha256: "202056708863a9c43f76639860dff9eee64660bbd6084beca86fa79c3418753f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.21"
+    version: "2.6.0"
   zego_uikit_prebuilt_call:
     dependency: "direct main"
     description:
@@ -1350,10 +1358,10 @@ packages:
     dependency: "direct main"
     description:
       name: zego_uikit_prebuilt_live_streaming
-      sha256: "9a92f666f279a403783191d5ff77d1e3e8c1e24bd5dae50eb2e2105c32d6160b"
+      sha256: "5a2e23ce8548eb4f6dba543879588e65a0be3ff54f00a9a5cf0e3f2e08da00c8"
       url: "https://pub.dev"
     source: hosted
-    version: "2.12.0"
+    version: "2.12.6"
   zego_zpns:
     dependency: transitive
     description:

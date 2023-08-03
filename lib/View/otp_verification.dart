@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:wow/View/bottom_navigation.dart';
 import 'package:wow/View/name.dart';
@@ -142,7 +143,7 @@ class _otp_verificationState extends State<otp_verification> {
                           "App Logo",
                           style: TextStyle(
                               fontSize: 30,
-                              color: Color(0xff111A41),
+                              color: font,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -173,11 +174,21 @@ class _otp_verificationState extends State<otp_verification> {
                       child: OTPTextField(
                         controller: _otpController,
                         length: 6,
+                        otpFieldStyle: OtpFieldStyle(
+                            backgroundColor: s2.withOpacity(.3),
+                            enabledBorderColor: s2.withOpacity(.3),
+                            borderColor: s2,
+                            focusBorderColor: s2,
+                            disabledBorderColor: s2
+
+                        ),
                         width: MediaQuery.of(context).size.width,
                         fieldWidth: 45,
                         style: TextStyle(
-                          fontSize: 17,
+                            fontSize: 17,
+                            color: Colors.white
                         ),
+
                         textFieldAlignment: MainAxisAlignment.spaceAround,
                         fieldStyle: FieldStyle.box,
                         onCompleted: otp,

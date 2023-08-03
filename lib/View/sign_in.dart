@@ -134,10 +134,10 @@ class _SignInState extends State<SignIn> {
       Notificationservices f1 = new Notificationservices();
       setState(() {
         f1.getDevicesToken().then((value) => ({
-              token = value,
-              print("azbc" + token.toString()),
-              print(value)
-            }));
+          token = value,
+          print("azbc" + token.toString()),
+          print(value)
+        }));
       });
       var data = jsonDecode(response.body.toString());
       print(data);
@@ -150,7 +150,7 @@ class _SignInState extends State<SignIn> {
         Fluttertoast.showToast(msg: "Login Successful");
         getStorage.write('Id', User_id);
         SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
+        await SharedPreferences.getInstance();
         sharedPreferences.setBool("isLogin", true);
 
         sharedPreferences.setString("user", "user");
@@ -161,14 +161,14 @@ class _SignInState extends State<SignIn> {
         update_token(token.toString(), User_id.toString());
         Fluttertoast.showToast(msg: "Registration Successful");
         getStorage.write('Id', User_id);
-       SharedPreferences SUId = await SharedPreferences.getInstance();
+        SharedPreferences SUId = await SharedPreferences.getInstance();
         SUId.setString("user_id", User_id.toString());
         SUId.setString("user", "user");
-      Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => mobile_num(
-                  status: '0',
-                  email: email_id.toString(),
-                )));
+              status: '0',
+              email: email_id.toString(),
+            )));
       } else {
         Fluttertoast.showToast(msg: "Invalid Input1111");
       }
